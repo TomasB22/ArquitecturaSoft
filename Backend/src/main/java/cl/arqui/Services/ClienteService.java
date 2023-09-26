@@ -4,11 +4,7 @@ import cl.arqui.Model.Cliente;
 import cl.arqui.Repository.ClienteRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
-
-
 @Service
 public class ClienteService {
     private final ClienteRepository clienteRepository;
