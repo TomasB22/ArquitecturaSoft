@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+
 @Service
 public class ClienteService {
     private final ClienteRepository clienteRepository;
@@ -14,8 +16,9 @@ public class ClienteService {
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
-    public ResponseEntity<List<Cliente>> getAll(){
-        return ResponseEntity.ok((List<Cliente>) clienteRepository.findAll());
+    public ResponseEntity<List<Cliente>> getAll() {
+        List<Cliente> clientes = (List<Cliente>) clienteRepository.findAll();
+        return ResponseEntity.ok(clientes);
     }
 
     public Cliente getById(Long id){
@@ -52,6 +55,5 @@ public class ClienteService {
             return ResponseEntity.badRequest().body("Error al agregar cliente");
         }
     }
-
 
 }

@@ -2,6 +2,7 @@ package cl.arqui.Controller;
 
 import cl.arqui.Model.Cliente;
 import cl.arqui.Services.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +13,14 @@ import java.util.List;
 public class MostrarClienteController {
     private final ClienteService clienteService;
 
+    @Autowired
     public MostrarClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
 
     @GetMapping
     public ResponseEntity<List<Cliente>> getAll(){
-        List<Cliente> clientes = (List<Cliente>) clienteService.getAll();
-        return ResponseEntity.ok(clientes);
+        return clienteService.getAll();
     }
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
