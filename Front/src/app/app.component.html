@@ -1,5 +1,7 @@
 <div class="container">
   <h1>Listado de Clientes</h1>
+  <button (click)="mostrarMorosos()">Mostrar Morosos</button>
+  <button (click)="reloadClientes()">Recargar Clientes</button>
   <table class="table">
     <thead>
       <tr>
@@ -7,15 +9,36 @@
         <th>Nombre</th>
         <th>Dirección</th>
         <th>Deuda</th>
+        <th>Acciones</th> <!-- Columna para botones -->
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cliente of clientes">
+      <tr *ngFor="let cliente of clientesToDisplay">
         <td>{{ cliente.id }}</td>
         <td>{{ cliente.nombre }}</td>
         <td>{{ cliente.direccion }}</td>
         <td>{{ cliente.deuda }}</td>
+        <td>
+          <button (click)="editarCliente(cliente)">Editar</button>
+          <button (click)="confirmarEliminarCliente(cliente)">Eliminar</button>
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Pantalla para modificar cliente -->
+<div *ngIf="clienteParaEditar" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="cancelarEdicion()">&times;</span>
+    <h2>Editar Cliente</h2>
+    <!-- Agrega campos de edición aquí -->
+    <label for="nombre">Nombre:</label>
+    <input [(ngModel)]="clienteParaEditar.nombre" name="nombre" required>
+    <label for="direccion">Dirección:</label>
+    <input [(ngModel)]="clienteParaEditar.direccion" name="direccion" required>
+    <label for="deuda">Deuda:</label>
+    <input [(ngModel)]="clienteParaEditar.deuda" name="deuda" required>
+    <button (click)="guardarEdicion()">Guardar Cambios</button>
+  </div>
 </div>
