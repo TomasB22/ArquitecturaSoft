@@ -5,21 +5,39 @@ import cl.arqui.Repository.ClienteRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * Clase para cargar datos de ejemplo en la base de datos al iniciar la aplicación.
+ */
 @Component
 class Preload implements CommandLineRunner {
     private final ClienteRepository clienteRepository;
 
-    public Preload (ClienteRepository clienteRepository) {
+    /**
+     * Constructor de la clase Preload.
+     *
+     * @param clienteRepository Repositorio de clientes.
+     */
+    public Preload(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
 
+    /**
+     * Método que se ejecuta al iniciar la aplicación para cargar los datos de ejemplo.
+     *
+     * @param args Argumentos de línea de comandos (no se utilizan).
+     * @throws Exception Si ocurre un error al cargar los datos.
+     */
     @Override
     public void run(String... args) throws Exception {
         cargarClientes();
     }
 
-    public void cargarClientes(){
+    /**
+     * Carga clientes de ejemplo en la base de datos.
+     */
+    public void cargarClientes() {
         try {
+            // Crear y guardar clientes de ejemplo
             Cliente cliente1 = new Cliente();
             cliente1.setId(1L);
             cliente1.setNombre("Cliente 1");
@@ -68,9 +86,10 @@ class Preload implements CommandLineRunner {
             cliente7.setDireccion("Direccion 7");
             cliente7.setDeuda(1221210);
             clienteRepository.save(cliente7);
-    }
-        catch (Exception e) {
-            System.out.println("Error al cargar clientes");
+
+            System.out.println("Clientes cargados con éxito.");
+        } catch (Exception e) {
+            System.out.println("Error al cargar clientes: " + e.getMessage());
         }
     }
 }
